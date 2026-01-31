@@ -1,0 +1,49 @@
+Idee/ Pipeline: Zwei Funktionen die seperat aufgerufen werden können 
+
+Übergeben wird dann das Video/ Bild
+
+    Bildprep:
+        - Ideensammlung:
+            - Bilder Laden Farbbild und Tiefenbild ^
+            - align des Tiefenbild auf das Farbbild mit ^
+                - Pipeline start ^
+                - Alignierungsobjekt erstellen mit (align = rs.align(rs.stream.color))^
+                - Frames Abrufen mit (align.process(frames))^
+                    - config der Bilder (config.enable_stream(rs.stream.**, 640, 480, rs.format.**, 30))color(bgr8) //depth(z16)^ 
+        -Genauer Aufbau (Funktionen):
+            - Init und config Realsense
+            - Erstellen eines Alignobjektes
+            - Pipeline starten
+            - Input + align
+            - Convert Input Frames (depth/ color) to Numpy Array
+            - Anzeigen der Bilder
+            - Exit Funktion
+            - Pipeline Stoppen
+
+        - ohne cam:
+            - Für die Testdaten müssen alignte Bilder erstellt werden 
+                - TODO: Hackathon2: Testdaten aligend aufnehmen 
+
+    Kantendedektion:
+        -Ideen/ Grobe Pipeline:    
+            - BGR 2 HSV
+            - Farbsegmentierung jeweils nach der Farbe der Wahl 1.BSP wird Rot sein (0-10//170-180 im HSV Raum)
+            - Morphologische Transformation  (Rauschen/ Löcher Schließen)
+            - Konturensuche 
+            - Kanten des Blocks anzeigen
+            
+        
+    Berechnung des Mittelpunktes:
+    (- Mit hilfe von 2D und 3D informationen (Verweundung des Bildmomentes))
+        - Geg: 
+            - Konturen der Blöcke 
+        - Berechnung des Bildmomentes
+        - Daraus den Schwerpunkt
+
+
+    Sonderfunktionen für Plazierung
+        - Einschränkung der Tiefeninformation (Maske)
+
+
+    Kontrolle des Bots:
+        - Custom Bewegungsprofiel
